@@ -26,8 +26,8 @@ class DCT():
         self.oriRow = 0
         self.numBits = 0   
     def encode_image(self,img,secret_msg):
-        secret=secret_msg
-        self.message = str(len(secret))+'*'+secret
+        secret=(secret_msg)
+        self.message = str(len(secret))+'*'+str(secret)
         self.bitMess = self.toBits()
         row,col = img.shape[:2]
         self.oriRow, self.oriCol = row, col  
