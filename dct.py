@@ -20,20 +20,20 @@ quant = np.array([[16,11,10,16,24,40,51,61],
 
 class DCT():    
     def __init__(self): 
-        self.message = None
-        self.bitMess = None
+        self.message = ""
+        self.bitMess = []
         self.oriCol = 0
         self.oriRow = 0
         self.numBits = 0   
     def encode_image(self,img,secret_msg):
-        secret=secret_msg
-        self.message = str(len(secret))+'*'+secret
+        secret = secret_msg if isinstance(secret_msg, str) else secret_msg.decode('utf-8')
+        self.message = str(len(secret)) + '*' + secret
         self.bitMess = self.toBits()
-        row,col = img.shape[:2]
-        self.oriRow, self.oriCol = row, col  
-        if((col/8)*(row/8)<len(secret)):
+        row, col = img.shape[:2]
+        self.oriRow, self.oriCol = row, col
+        if (col / 8) * (row / 8) < len(secret):
             print("Error: Message too large to encode in image")
-            return False
+            return img
         if row%8 != 0 or col%8 != 0:
             img = self.addPadd(img, row, col)
         

@@ -27,8 +27,7 @@ def encode():
         if file:
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filepath)
-            encode_function(filepath, secret)
-            encoded_filepath = os.path.join(app.config['ENCODED_FOLDER'], "dct_" + file.filename)
+            encoded_filepath = encode_function(filepath, secret)
             return f'Encoded image saved at {encoded_filepath}'
     return render_template("encode.html")
 
